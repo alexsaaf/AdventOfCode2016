@@ -38,8 +38,10 @@ namespace AdventOfCode {
             #region task2
             Console.WriteLine("Running task 2");
             Task2 task2 = new Task2();
-            string task2Result = task2.CalculateBathroomCode(ReadLinesFromFile("Task2Input.txt"));
-            Console.WriteLine("The result of task 2 is: " + task2Result);
+            string task2AResult = task2.CalculateBathroomCode(ReadLinesFromFile("Task2Input.txt"), false);
+            string task2BResult = task2.CalculateBathroomCode(ReadLinesFromFile("Task2Input.txt"), true);
+            Console.WriteLine("The result of task 2 A is: " + task2AResult);
+            Console.WriteLine("The result of task 2 B is: " + task2BResult);
             #endregion
 
             #region task3
