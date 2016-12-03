@@ -5,7 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO;
-
+ 
+/*          \ /
+          -->*<--
+            /_\
+           /_\_\
+          /_/_/_\
+          /_\_\_\
+         /_/_/_/_\
+         /_\_\_\_\
+        /_/_/_/_/_\
+        /_\_\_\_\_\
+       /_/_/_/_/_/_\
+       /_\_\_\_\_\_\
+      /_/_/_/_/_/_/_\
+           [___]
+*/
+//Possible TODO: Let the tasks read their input themselves
 namespace AdventOfCode {
     class Program {
         static void Main(string[] args) {
@@ -21,28 +37,36 @@ namespace AdventOfCode {
             #region task2
             Console.WriteLine("Running task 2");
             Task2 task2 = new Task2();
-
-
-
-            //Open the file with the input
-            var filePath = Path.Combine(Environment.CurrentDirectory, "\\Task2Input.txt");
-            StreamReader file = new System.IO.StreamReader("Task2Input.txt");
-
-            //Read all the lines
-            List<string> instructions = new List<string>();
-            string line;
-            while((line = file.ReadLine()) != null) {
-                instructions.Add(line);
-            }
-
-            //Call task2 and print the result
-            string task2Result = task2.CalculateBathroomCode(instructions.ToArray());
+            string task2Result = task2.CalculateBathroomCode(ReadLinesFromFile("Task2Input.txt"));
             Console.WriteLine("The result of task 2 is: " + task2Result);
+            #endregion
+
+            #region task3
+            Console.WriteLine("Running task 3");
+            Task3 task3 = new Task3();
+            int task3Result = task3.CheckTriangles(ReadLinesFromFile("Task3Input.txt"));
+            Console.WriteLine("The result of task 3 is: " + task3Result);
             #endregion
 
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
+        }
+
+
+        static string[] ReadLinesFromFile(string fileName) {
+            //Open the file
+            StreamReader file = new System.IO.StreamReader(fileName);
+
+            //Read all the lines
+            List<string> instructions = new List<string>();
+            string line;
+            while ((line = file.ReadLine()) != null) {
+                instructions.Add(line);
+            }
+
+            //Return them as array
+            return instructions.ToArray();
         }
     }
 }

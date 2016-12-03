@@ -22,8 +22,6 @@ namespace AdventOfCode {
             xPos = 1;
             yPos = 1;
 
-            Console.WriteLine(keypad[2, yPos]);
-
             //Decode every instruction
             foreach (string instruction in instructions) {
                 //For every character in the instruction, apply change
