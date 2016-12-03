@@ -11,7 +11,6 @@ namespace AdventOfCode {
         public int CheckTriangles(string[] triangles) {
             //Keep count of the OK triangles
             int realTriangles = 0;
-            Console.WriteLine(triangles.Length);
 
             foreach (string triangle in triangles) {
                 //Split on two spaces and filter out empty elements
