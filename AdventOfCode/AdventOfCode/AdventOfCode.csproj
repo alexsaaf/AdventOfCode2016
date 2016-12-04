@@ -48,6 +48,7 @@
     <Compile Include="Task1.cs" />
     <Compile Include="Task2.cs" />
     <Compile Include="Task3.cs" />
+    <Compile Include="Task4.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -57,6 +58,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Task3Input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Task4Input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

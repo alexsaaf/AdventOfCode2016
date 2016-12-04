@@ -51,6 +51,14 @@ namespace AdventOfCode {
             Console.WriteLine("The result of task 3 is: " + task3Result);
             #endregion
 
+
+            #region task4
+            Console.WriteLine("Running task 4: ");
+            Task4 task4 = new Task4();
+            int task4result =  task4.RealRoomSectorIDSum(ReadLinesFromFile("Task4Input.txt"));
+            Console.WriteLine("The result of task 4 A is: " + task4result);
+            #endregion
+
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
