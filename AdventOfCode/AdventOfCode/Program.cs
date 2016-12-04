@@ -47,8 +47,38 @@ namespace AdventOfCode {
             #region task3
             Console.WriteLine("Running task 3");
             Task3 task3 = new Task3();
-            int task3Result = task3.CheckTriangles(ReadLinesFromFile("Task3Input.txt"));
-            Console.WriteLine("The result of task 3 is: " + task3Result);
+            //Get the result for task 3A
+            int task3AResult = task3.CheckTriangles(ReadLinesFromFile("Task3Input.txt"));
+
+            //Get the result for task 3B
+            //Read the input
+            string[] task3Input = ReadLinesFromFile("Task3Input.txt");
+            string[] task3BInput = new string[task3Input.Length];
+            //Read 3 lines at a time and build the triangles from the "columns" in the lines
+            int i = 0;
+            while(i < task3Input.Length - 2){
+                
+                string firstTriangle = "";
+                string secondTriangle = "";
+                string thirdTriangle = "";
+
+                for(int y = 0; y < 3; y++){
+                    string[] line = Regex.Split(task3Input[i + y], "  ").Where(x => !string.IsNullOrEmpty(x)).ToArray();
+                    firstTriangle += "  " + line[0];
+                    secondTriangle += "  " + line[1];
+                    thirdTriangle += "  " + line[2];
+                }
+
+                task3BInput[i] = firstTriangle;
+                task3BInput[i + 1] = secondTriangle;
+                task3BInput[i + 2] = thirdTriangle;
+                i += 3;
+            }
+
+            //Get the result for 3B
+            int task3BResult = task3.CheckTriangles(task3BInput);
+            Console.WriteLine("The result of task 3 A is: " + task3AResult);
+            Console.WriteLine("The result of task 3 B is: " + task3BResult);
             #endregion
 
             // Keep the console window open
