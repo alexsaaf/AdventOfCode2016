@@ -81,7 +81,6 @@ namespace AdventOfCode {
             Console.WriteLine("The result of task 3 B is: " + task3BResult);
             #endregion
 
-
             #region task4
             Console.WriteLine("Running task 4: ");
             Task4 task4 = new Task4();
