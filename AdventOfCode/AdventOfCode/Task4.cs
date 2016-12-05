@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace AdventOfCode {
     class Task4 {
 
-        List<string> realRoomNames;
+        public Dictionary<string, int> realRooms;
 
         public int RealRoomSectorIDSum(string[] rooms) {
-            realRoomNames = new List<string>)();
+            realRooms = new Dictionary<string, int>();
             int total = 0;
             foreach (string room in rooms) {
                 total += CheckRoom(room);
@@ -72,16 +72,28 @@ namespace AdventOfCode {
                 letterCounts.Remove(checkSum[i]);
             }
             string[] words = components.Take(components.Length - 2).ToArray();
-            DecodeName(sectorID, words);
+            realRooms.Add(DecodeName(sectorID, words), sectorID);
             return sectorID;
+
         }
         
-        void DecodeName(int sectorID, string[] components){
+        string DecodeName(int sectorID, string[] components){
             //Shift the letters by sectorID and add the string and sector ID to the list
-            foreach (string word in components)
-            {
-
+            string name = "";
+            foreach (string word in components) {
+                foreach (char character in word) {
+                    name += ShiftCharacter(character, sectorID);
+                }
+                name += " ";
             }
+            return name;
+        }
+
+        char ShiftCharacter(char character, int sectorID) {
+            int characterCode = character - 97;
+            characterCode += sectorID;
+            char resultChar = (char)(97 + (characterCode % 26));
+            return resultChar;
         }
     }
 

@@ -86,6 +86,24 @@ namespace AdventOfCode {
             Task4 task4 = new Task4();
             int task4result =  task4.RealRoomSectorIDSum(ReadLinesFromFile("Task4Input.txt"));
             Console.WriteLine("The result of task 4 A is: " + task4result);
+            //B
+            //Search all the real rooms for a room with the three keywords
+            string targetRoom = null;
+            string[] realRooms = task4.realRooms.Keys.ToArray();
+            foreach (string room in realRooms) {
+                //If it contains the keywords
+                if (room.Contains("north") && room.Contains("pole") && room.Contains("object")) {
+                    targetRoom = room;
+                    break;
+                }
+            }
+
+            //If we found a room, get the sector ID for that room
+            if (targetRoom != null) {
+                Console.WriteLine("The result of task 4 B is: " + task4.realRooms[targetRoom] + " (Room: " + targetRoom +")");
+            } else {
+                Console.WriteLine("The result of task 4 B was not found :(");
+            }
             #endregion
 
             // Keep the console window open
