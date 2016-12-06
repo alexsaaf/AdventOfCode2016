@@ -24,7 +24,10 @@ using System.IO;
 //Possible TODO: Let the tasks read their input themselves
 namespace AdventOfCode {
     class Program {
+
         static void Main(string[] args) {
+
+            bool runTask5 = false;
 
             #region task1
             Console.WriteLine("Running task 1: ");
@@ -107,12 +110,25 @@ namespace AdventOfCode {
             #endregion
 
             #region task5
-            Console.WriteLine("Running task 5 (This could take some time)");
-            Task5 task5 = new Task5();
-            //string task5AResult = task5.FindEasyPassword("cxdnnyjw");
-            //Console.WriteLine("The result of task 5 A is: " + task5AResult);
-            string task5BResult = task5.FindAdvancedPassword("cxdnnyjw");
-            Console.WriteLine("The result of task 5 B is:" + task5BResult);
+            if (runTask5) {
+                Console.WriteLine("Running task 5 (This could take some time)");
+                Task5 task5 = new Task5();
+                string task5AResult = task5.FindEasyPassword("cxdnnyjw");
+                Console.WriteLine("The result of task 5 A is: " + task5AResult);
+                string task5BResult = task5.FindAdvancedPassword("cxdnnyjw");
+                Console.WriteLine("The result of task 5 B is:" + task5BResult);
+            } else {
+                Console.WriteLine("Skipping task 5 (Enabled by default)");
+            }
+            #endregion
+
+            #region task6
+            Console.WriteLine("Running task 6: ");
+            Task6 task6 = new Task6();
+            string task6AResult = task6.InterpretMessage(ReadLinesFromFile("Task6Input.txt"), false);
+            Console.WriteLine("The result of task 6 A is: " + task6AResult);
+            string task6BResult = task6.InterpretMessage(ReadLinesFromFile("Task6Input.txt"), true);
+            Console.WriteLine("The result of task 6 B is: " + task6BResult);
             #endregion
 
             // Keep the console window open
