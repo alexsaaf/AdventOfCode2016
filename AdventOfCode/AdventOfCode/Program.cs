@@ -106,6 +106,15 @@ namespace AdventOfCode {
             }
             #endregion
 
+            #region task5
+            Console.WriteLine("Running task 5 (This could take some time)");
+            Task5 task5 = new Task5();
+            //string task5AResult = task5.FindEasyPassword("cxdnnyjw");
+            //Console.WriteLine("The result of task 5 A is: " + task5AResult);
+            string task5BResult = task5.FindAdvancedPassword("cxdnnyjw");
+            Console.WriteLine("The result of task 5 B is:" + task5BResult);
+            #endregion
+
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
