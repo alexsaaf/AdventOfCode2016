@@ -35,7 +35,7 @@ namespace AdventOfCode {
                 if (IsIndicating(hash)) {
                     int pos;
                     if (Int32.TryParse(hash[5].ToString(), out pos)) {
-                        if(pos >= 0 && pos < 8 && stringBuilder[pos] == '.') {
+                        if (pos >= 0 && pos < 8 && stringBuilder[pos] == '.') {
                             stringBuilder.Remove(pos, 1);
                             stringBuilder.Insert(pos, hash[6]);
                             foundLetters++;
@@ -51,7 +51,7 @@ namespace AdventOfCode {
 
         public bool IsIndicating(string hash) {
             Regex pattern = new Regex("^00000.*");
-            if(pattern.IsMatch(hash)) {
+            if (pattern.IsMatch(hash)) {
                 return true;
             }
             return false;
