@@ -131,6 +131,13 @@ namespace AdventOfCode {
             Console.WriteLine("The result of task 6 B is: " + task6BResult);
             #endregion
 
+            #region Task7
+            Console.WriteLine("Running task 7: ");
+            Task7 task7 = new Task7();
+            int task7Result = task7.CountTLSSupporting(ReadLinesFromFile("Task7Input.txt"));
+            Console.WriteLine("The result of task 7 A is: " + task7Result);
+            #endregion
+
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
