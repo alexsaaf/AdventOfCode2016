@@ -134,8 +134,10 @@ namespace AdventOfCode {
             #region Task7
             Console.WriteLine("Running task 7: ");
             Task7 task7 = new Task7();
-            int task7Result = task7.CountTLSSupporting(ReadLinesFromFile("Task7Input.txt"));
-            Console.WriteLine("The result of task 7 A is: " + task7Result);
+            int task7AResult = task7.CountTLSSupporting(ReadLinesFromFile("Task7Input.txt"));
+            Console.WriteLine("The result of task 7 A is: " + task7AResult);
+            int task7BResult = task7.CountSSLSupporting(ReadLinesFromFile("Task7Input.txt"));
+            Console.WriteLine("The result of task 7 B is: " + task7BResult);
             #endregion
 
             // Keep the console window open
