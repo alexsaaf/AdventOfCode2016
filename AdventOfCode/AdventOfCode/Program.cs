@@ -140,6 +140,16 @@ namespace AdventOfCode {
             Console.WriteLine("The result of task 7 B is: " + task7BResult);
             #endregion
 
+            #region Task8
+            Console.WriteLine("Running task 7: ");
+            Task8 task8 = new Task8();
+            int task8AResult = task8.ScreenPixelsLit(ReadLinesFromFile("Task8Input.txt"));
+            Console.WriteLine("The result of task 8 A is: " + task8AResult);
+
+
+            #endregion
+
+
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();

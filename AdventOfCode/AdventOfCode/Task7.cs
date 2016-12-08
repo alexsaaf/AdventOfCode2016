@@ -83,7 +83,6 @@ namespace AdventOfCode {
             
             //If there is an ABBA in hypernets, we do not support TLS
             foreach(string hypernet in hypernets.ToArray()){
-                Console.WriteLine(hypernet);
                 if(ContainsABBA(hypernet)){
                     return false;
                 }
@@ -106,7 +105,6 @@ namespace AdventOfCode {
         bool ContainsABBA(string word) {
             for (int i = 0; i < word.Length - 3; i++) {
                 if (word[i] == word[i + 3] && word[i + 1] == word[i + 2] && word[i] != word[i + 1]) {
-                    Console.WriteLine("Does support TLS. " + word);
                     return true;
                 }
             }
