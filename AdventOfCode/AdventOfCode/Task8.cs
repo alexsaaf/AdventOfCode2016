@@ -10,7 +10,7 @@ namespace AdventOfCode {
         //The screen. 0 means the pixel is off. 1 means it is on.
         int[][] screen;
 
-        public int ScreenPixelsLit(string[] commands) {
+        public int RunScreenCommands(string[] commands) {
             //Initialize the screen
             screen = new int[50][];
             for(int i = 0; i < screen.Length; i++) {
@@ -32,6 +32,20 @@ namespace AdventOfCode {
 
             return result;
         }
+
+        public void PrintScreen() {
+            for(int i = 0; i < screen[0].Length; i++) {
+                string toPrint = "";
+                for(int j = 0; j < screen.Length; j++) {
+                    if(screen[j][i] == 1) {
+                        toPrint += "#";
+                    } else {
+                        toPrint += " ";
+                    }
+                }
+                Console.WriteLine(toPrint);
+            }
+        } 
 
         void CreateRect(string size) {
             string[] dimensions = size.Split('x');

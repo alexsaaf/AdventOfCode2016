@@ -143,9 +143,10 @@ namespace AdventOfCode {
             #region Task8
             Console.WriteLine("Running task 7: ");
             Task8 task8 = new Task8();
-            int task8AResult = task8.ScreenPixelsLit(ReadLinesFromFile("Task8Input.txt"));
+            int task8AResult = task8.RunScreenCommands(ReadLinesFromFile("Task8Input.txt"));
             Console.WriteLine("The result of task 8 A is: " + task8AResult);
-
+            Console.WriteLine("The result of task 8 B is: ");
+            task8.PrintScreen();
 
             #endregion
 
