@@ -150,6 +150,12 @@ namespace AdventOfCode {
 
             #endregion
 
+            #region task 9
+            Task9 task9 = new Task9();
+            task9.DecompressFile(ReadLinesFromFile("Task9Input.txt"));
+            Console.WriteLine("The answer to task 9 A is: " + task9.decompressedLength);
+
+            #endregion
 
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
