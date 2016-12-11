@@ -152,9 +152,11 @@ namespace AdventOfCode {
 
             #region task 9
             Task9 task9 = new Task9();
-            task9.DecompressFile(ReadLinesFromFile("Task9Input.txt"));
-            Console.WriteLine("The answer to task 9 A is: " + task9.decompressedLength);
-
+            string input = ReadLinesFromFile("Task9Input.txt")[0];
+            long task9AResult = task9.CalculateSize(input, 0, input.Length, false);
+            Console.WriteLine("The answer to task 9 A is: " + task9AResult);
+            long task9BResult = task9.CalculateSize(input, 0, input.Length, true);
+            Console.WriteLine("The answer to task 9 B is: " + task9BResult);
             #endregion
 
             // Keep the console window open
