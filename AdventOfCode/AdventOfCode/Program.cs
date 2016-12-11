@@ -159,6 +159,12 @@ namespace AdventOfCode {
             Console.WriteLine("The answer to task 9 B is: " + task9BResult);
             #endregion
 
+            #region task 10
+            Task10 task10 = new Task10();
+            int task10AResult = task10.FollowInstructions(ReadLinesFromFile("Task10Input.txt"), 17, 61);
+            Console.WriteLine("The answer to task 10 A is: " + task10AResult);
+            #endregion
+
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
