@@ -131,17 +131,17 @@ namespace AdventOfCode {
             int lower = GetLower();
             int higher = GetHigher();
 
-
-            Console.WriteLine("I have " + lower + " and " + higher);
-            Console.WriteLine("I give " + lower + " to " + lowerTo);
-            Console.WriteLine("I give " + higher + " to " + upperTo);
             //Set my values to -1
             value1 = -1;
             value2 = -1;
 
             //Give lower
             if (lowerToBin) {
-                //task10.bins[lowerTo] = lower;
+                if (task10.bins.ContainsKey(lowerTo)) {
+                    task10.bins[lowerTo] = lower;
+                }else {
+                    task10.bins.Add(lowerTo, lower);
+                }
             } else {
                 if (task10.bots.ContainsKey(lowerTo)) {
                     task10.bots[lowerTo].ReceiveValue(lower);
@@ -154,7 +154,11 @@ namespace AdventOfCode {
 
             //Give higher
             if (upperToBin) {
-                //task10.bins[upperTo] = higher;
+                if (task10.bins.ContainsKey(upperTo)) {
+                    task10.bins[upperTo] = higher;
+                } else {
+                    task10.bins.Add(upperTo, higher);
+                }
             } else {
                 if (task10.bots.ContainsKey(upperTo)) {
                     task10.bots[upperTo].ReceiveValue(higher);

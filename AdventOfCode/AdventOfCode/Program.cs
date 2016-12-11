@@ -163,6 +163,7 @@ namespace AdventOfCode {
             Task10 task10 = new Task10();
             int task10AResult = task10.FollowInstructions(ReadLinesFromFile("Task10Input.txt"), 17, 61);
             Console.WriteLine("The answer to task 10 A is: " + task10AResult);
+            Console.WriteLine("The answer to task 10 B is: " + task10.bins[0] * task10.bins[1] * task10.bins[2]);
             #endregion
 
             // Keep the console window open
