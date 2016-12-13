@@ -159,6 +159,7 @@ namespace AdventOfCode {
             Console.WriteLine("The answer to task 9 B is: " + task9BResult);
             #endregion
 
+
             #region task 10
             Task10 task10 = new Task10();
             int task10AResult = task10.FollowInstructions(ReadLinesFromFile("Task10Input.txt"), 17, 61);
@@ -166,6 +167,33 @@ namespace AdventOfCode {
             Console.WriteLine("The answer to task 10 B is: " + task10.bins[0] * task10.bins[1] * task10.bins[2]);
             #endregion
 
+            #region task 11
+            Task11 task11 = new Task11();
+            Dictionary<int, List<string>> problem = new Dictionary<int, List<string>>();
+
+            //Setting up the problem
+            List<string> firstFloor = new List<string>();
+            firstFloor.Add("polonium generator");
+            firstFloor.Add("thulium generator");
+            firstFloor.Add("thulium-compatible microchip");
+            firstFloor.Add("promethium generator");
+            firstFloor.Add("ruthenium generator");
+            firstFloor.Add("ruthenium-compatible microchip");
+            firstFloor.Add("cobalt generator");
+            firstFloor.Add("cobalt-compatible microchip");
+            List<string> secondFloor = new List<string>();
+            secondFloor.Add("polonium-compatible microchip");
+            secondFloor.Add("promethium-compatible microchip");
+            List<string> thirdFloor = new List<string>();
+            List<string> fourthFloor = new List<string>();
+            problem.Add(0, firstFloor);
+            problem.Add(1, secondFloor);
+            problem.Add(2, thirdFloor);
+            problem.Add(3, fourthFloor);
+
+            task11.FindShortestPlan(problem, 10);
+            Console.WriteLine("The answer to task 11 A is: " + task11.shortestPath);
+            #endregion
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
