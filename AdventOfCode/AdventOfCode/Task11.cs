@@ -11,16 +11,26 @@ namespace AdventOfCode {
 
         public int shortestPath;
         int objectCount;
+        HashSet<string> visitedStates;
 
         public void FindShortestPlan(Dictionary<int, List<string>> floors, int nrOfObjects) {
             shortestPath = int.MaxValue;
             objectCount = nrOfObjects;
+            visitedStates = new HashSet<string>();
             //Call the recursive function. When it returns all of it's children will have found their paths
-            FindShortestPlanRec(floors, 0, 0);
+            FindShortestPlanRec(floors, 0, 0, "start -> ");
         }
 
 
-        void FindShortestPlanRec(Dictionary<int, List<string>> floors, int stepsTaken, int atFloor) {
+        void FindShortestPlanRec(Dictionary<int, List<string>> floors, int stepsTaken, int atFloor, string sequence) {
+            //Console.WriteLine(floors[3].Count());
+            string state = StringifyState(floors, atFloor);
+            Console.WriteLine(state);
+            if(visitedStates.Contains(state)){
+                return;
+            }else{
+                visitedStates.Add(state);
+            }
 
             //If we have taken more steps than the shortest path, we are not on a desired path
             if(stepsTaken >= shortestPath) {
@@ -29,55 +39,81 @@ namespace AdventOfCode {
 
             //If this state is not valid, abort
             if (!IsValidState(floors)) {
-                Console.WriteLine("Invalidstate!");
+                //Console.WriteLine("Invalidstate!");
                 return;
             }
-            Console.WriteLine("Not invalid state");
+            //Console.WriteLine("Not invalid state");
+
             //If this is a goalstate, we are done!
             if (IsGoalState(floors)) {
                 if(shortestPath > stepsTaken) {
+                    int topFloor = floors.Keys.ToArray().Max();
+                    Console.WriteLine("Found goalstate and setting shortestpath! ShortestBefore: " + shortestPath + " after: " + stepsTaken);
+                    Console.WriteLine("Objects in top floor: " + floors[topFloor].Count);
+                    Console.WriteLine("Found throught sequence: " + sequence);
                     shortestPath = stepsTaken;
                 }
                 return;
             }
 
             //If there is no generator or chip, the elevator wont move and we are in a dead end
-            if(floors.Count == 0) {
+            if(floors[atFloor].Count == 0) {
                 return;
             }
 
-            Console.WriteLine("At floor " + atFloor + " With " + floors[atFloor].Count + " objects");
-            for(int i = 0; i < floors[atFloor].Count; i++) {
-                Dictionary<int, List<string>> newDict = floors;
-                List<string> floorList = floors[atFloor].ConvertAll(component => new string(component.ToCharArray()));
-                string element = floors[atFloor][i];
-                Console.WriteLine("Handling element: " + element + " (index = " + i + ", total = " + floors[atFloor].Count+ ")");
-                floorList.RemoveAt(i);
-                newDict[atFloor] = floorList;
-                //First try moving the element up
-                if(atFloor < floors.Count()) {
-                    Console.WriteLine("Moving " + element + "to floor " + (atFloor + 1));
-                    Dictionary<int, List<string>> upOneFloor = newDict;
-                    upOneFloor[atFloor + 1].Add(element);
-                    FindShortestPlanRec(upOneFloor, stepsTaken++, atFloor + 1);
-                }
-
-                //Then try moving it down
-                if(atFloor > 0) {
-                    Console.WriteLine("Moving " + element + " to floor " + (atFloor - 1));
-                    Dictionary<int, List<string>> downOneFloor = newDict;
-                    downOneFloor[atFloor - 1].Add(element);
-                    FindShortestPlanRec(downOneFloor, stepsTaken++, atFloor - 1);
-                }
+            if (stepsTaken > 10) {
+                return;
             }
+
+            //Console.WriteLine("At floor " + atFloor + " With " + floors[atFloor].Count + " objects");
+            for(int i = 0; i < floors[atFloor].Count; i++) {
+                string element = floors[atFloor][i];
+                //Console.WriteLine("Handling element: " + element + " (index = " + i + ", total = " + floors[atFloor].Count+ ")");
+                floors[atFloor].RemoveAt(i);
+                //First try moving the element up
+                if(atFloor < floors.Count - 1) {
+                    //Console.WriteLine("Moving " + element + "to floor " + (atFloor + 1));
+                    floors[atFloor + 1].Add(element);
+                    FindShortestPlanRec(floors, stepsTaken + 1, atFloor + 1, sequence + "moving " + element + " to " + (atFloor + 1) + " -> ");
+                    floors[atFloor + 1].Remove(element);
+                }
+                floors[atFloor].Insert(i, element);
+            }
+
+
+
+            //Then try moving them down
+            for(int i = 0; i < floors[atFloor].Count; i++){
+                string element = floors[atFloor][i];
+                //Console.WriteLine("Handling element: " + element + " (index = " + i + ", total = " + floors[atFloor].Count+ ")");
+                floors[atFloor].RemoveAt(i);
+                if (atFloor > 0) {
+                    //  Console.WriteLine("Moving " + element + " to floor " + (atFloor - 1));
+                    floors[atFloor - 1].Add(element);
+                    FindShortestPlanRec(floors, stepsTaken + 1, atFloor - 1, sequence + "moving " + element + " to " + (atFloor + -1) + " -> ");
+                    floors[atFloor - 1].Remove(element);
+                }
+                floors[atFloor].Insert(i, element);
+            }
+
+            //Try moving down
+            if (atFloor > 0) {
+                FindShortestPlanRec(floors, stepsTaken + 1, atFloor - 1, sequence + " moving myself down -> ");
+            }
+
+            //Try moving up
+            if (atFloor < floors.Count - 1) {
+                FindShortestPlanRec(floors, stepsTaken + 1, atFloor + 1, sequence + " moving myself up ->");
+            }
+
 
         }
 
         //Returns true if all objects are on the top floor
         bool IsGoalState(Dictionary<int, List<string>> floors) {
-            int topFloor = floors.Keys.ToArray().Max();
-            Console.WriteLine("Checking goalstate! Count of top floor is: " + floors[topFloor].Count());
-            return (floors[topFloor].Count() == objectCount);
+            //int topFloor = floors.Keys.ToArray().Max();
+            //Console.WriteLine("Checking goalstate! Count of top floor is: " + floors[3].Count());
+            return (floors[3].Count() == objectCount);
         }
 
         bool IsValidState(Dictionary<int, List<string>> floors) {
@@ -123,6 +159,23 @@ namespace AdventOfCode {
                     generators.Add(componentParts[0]);
                 }
             }
+        }
+
+        string StringifyState(Dictionary<int, List<string>> floors, int atFloor){
+            string result = "";
+            result += atFloor;
+
+            foreach (int key in floors.Keys) {
+                result += "floor" + key;
+                List<string> components = floors[key];
+                components.Sort();
+                foreach (string component in components) {
+                    result += component;
+                    
+                }
+            }
+
+            return result;
         }
     }
 }
