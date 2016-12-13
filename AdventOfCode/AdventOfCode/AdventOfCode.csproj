@@ -48,6 +48,8 @@
     <Compile Include="Task1.cs" />
     <Compile Include="Task10.cs" />
     <Compile Include="Task11.cs" />
+    <Compile Include="Task12.cs" />
+    <Compile Include="Task13.cs" />
     <Compile Include="Task2.cs" />
     <Compile Include="Task3.cs" />
     <Compile Include="Task4.cs" />
@@ -62,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Task10Input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Task12Input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Task2Input.txt">

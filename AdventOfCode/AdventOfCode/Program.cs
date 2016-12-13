@@ -191,9 +191,29 @@ namespace AdventOfCode {
             problem.Add(2, thirdFloor);
             problem.Add(3, fourthFloor);
 
-            task11.FindShortestPlan(problem, 10);
-            Console.WriteLine("The answer to task 11 A is: " + task11.shortestPath);
+            //task11.FindShortestPlan(problem, 10);
+            //Console.WriteLine("The answer to task 11 A is: " + task11.shortestPath);
             #endregion
+
+            #region task12
+            Task12 task12 = new Task12();
+            Dictionary<string, int> variables = new Dictionary<string, int>();
+            task12.RunAssembunnyCode(ReadLinesFromFile("task12Input.txt"), variables);
+            Console.WriteLine("The answer to task 12 A is: " + task12.variables["a"]);
+            Dictionary<string, int> variables2 = new Dictionary<string, int>();
+            variables2.Add("c", 1);
+            task12.RunAssembunnyCode(ReadLinesFromFile("task12Input.txt"), variables2);
+            Console.WriteLine("The answer to task 12 B is: " + task12.variables["a"]);
+            #endregion
+
+            #region task13
+            Task13 task13 = new Task13();
+            int task13AResult = task13.FindPosition(31, 39, 1362, false);
+            Console.WriteLine("The answer to task 13 A is: " + task13AResult);
+            int task13BResult = task13.FindPosition(31, 39, 1362, true);
+            Console.WriteLine("The answer to task 13 B is: " + task13BResult);
+            #endregion
+
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
