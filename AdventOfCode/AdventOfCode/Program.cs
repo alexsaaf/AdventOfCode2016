@@ -216,8 +216,8 @@ namespace AdventOfCode {
 
             #region task14
             Task14 task14 = new Task14();
-            //int task14AResult = task14.GenerateKey(64, "ngcjuoqr", 0);
-            //Console.WriteLine("The answer to task 14 A is: " + task14AResult);
+            int task14AResult = task14.GenerateKey(64, "ngcjuoqr", 0);
+            Console.WriteLine("The answer to task 14 A is: " + task14AResult);
             int task14BResult = task14.GenerateKey(64, "ngcjuoqr", 2016);
             Console.WriteLine("The answer to task 14 B is: " + task14BResult);
             #endregion

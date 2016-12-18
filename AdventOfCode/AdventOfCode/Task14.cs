@@ -30,8 +30,11 @@ namespace AdventOfCode {
             confirmedKeys = new List<foundKey>();
             potentialKeys = new List<foundKey>();
 
+            bool keepSearching = true;
+            bool onlyConfirm = false;
+
             //While we have not found enough keys
-            while(confirmedKeys.Count < keyIndex + 1) {
+            while(keepSearching) {
                 //Generate a new hash
                 string hash = CalculateHashWithStretch(salt + index.ToString(), stretchHashBy);
                 //Check if it contains a sequence of 5 of one character
@@ -60,14 +63,20 @@ namespace AdventOfCode {
                         potentialKeys.Remove(key);
                         confirmedKeys.Add(key);
                     }
-                    //This key is also a potential key
-                    potentialKeys.Add(new foundKey(index, hash, character));
-                } else if(Regex.IsMatch(hash, "(.)\\1{2,}")) {
+                    if (!onlyConfirm) {
+                        //This key is also a potential key
+                        potentialKeys.Add(new foundKey(index, hash, character));
+                    }
+                } else if(Regex.IsMatch(hash, "(.)\\1{2,}") && !onlyConfirm) {
                     //If it does not contain 5 but it contains 3
                     Match match2 = Regex.Match(hash, "(.)\\1{2,}");
                     potentialKeys.Add(new foundKey(index, hash, match2.ToString()[0]));
                 }
                 index++;
+                onlyConfirm = confirmedKeys.Count > keyIndex;
+                if(onlyConfirm && potentialKeys.Count == 0) {
+                    keepSearching = false;
+                }
             }
 
             //We have found all the keys up to the key we are searching for,
