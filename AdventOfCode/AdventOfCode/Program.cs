@@ -28,6 +28,8 @@ namespace AdventOfCode {
         static void Main(string[] args) {
 
             bool runTask5 = false;
+            bool runTask12B = false;
+            bool runTask14B = false;
 
             #region task1
             Console.WriteLine("Running task 1: ");
@@ -200,10 +202,14 @@ namespace AdventOfCode {
             Dictionary<string, int> variables = new Dictionary<string, int>();
             task12.RunAssembunnyCode(ReadLinesFromFile("task12Input.txt"), variables);
             Console.WriteLine("The answer to task 12 A is: " + task12.variables["a"]);
-            Dictionary<string, int> variables2 = new Dictionary<string, int>();
-            variables2.Add("c", 1);
-            task12.RunAssembunnyCode(ReadLinesFromFile("task12Input.txt"), variables2);
-            Console.WriteLine("The answer to task 12 B is: " + task12.variables["a"]);
+            if (runTask12B) {
+                Dictionary<string, int> variables2 = new Dictionary<string, int>();
+                variables2.Add("c", 1);
+                task12.RunAssembunnyCode(ReadLinesFromFile("task12Input.txt"), variables2);
+                Console.WriteLine("The answer to task 12 B is: " + task12.variables["a"]);
+            } else {
+                Console.WriteLine("Skipping task 12 B (Enabled by default)");
+            }
             #endregion
 
             #region task13
@@ -218,9 +224,22 @@ namespace AdventOfCode {
             Task14 task14 = new Task14();
             int task14AResult = task14.GenerateKey(64, "ngcjuoqr", 0);
             Console.WriteLine("The answer to task 14 A is: " + task14AResult);
-            int task14BResult = task14.GenerateKey(64, "ngcjuoqr", 2016);
-            Console.WriteLine("The answer to task 14 B is: " + task14BResult);
+            if (runTask14B) {
+                int task14BResult = task14.GenerateKey(64, "ngcjuoqr", 2016);
+                Console.WriteLine("The answer to task 14 B is: " + task14BResult);
+            } else {
+                Console.WriteLine("Skipping task 14B (Enabled by default)");
+            }
             #endregion
+
+            #region task15
+            Task15 task15 = new Task15();
+            int task15AResult = task15.GetEarliestTime(ReadLinesFromFile("Task15Input.txt"), false);
+            Console.WriteLine("The answer to task 15 A is: " + task15AResult);
+            int task15BResult = task15.GetEarliestTime(ReadLinesFromFile("Task15Input.txt"), true);
+            Console.WriteLine("The answer to task 15 B is: " + task15BResult);
+            #endregion
+
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
