@@ -240,6 +240,23 @@ namespace AdventOfCode {
             Console.WriteLine("The answer to task 15 B is: " + task15BResult);
             #endregion
 
+            #region task16
+            Task16 task16 = new Task16();
+            string task16AResult = task16.FillDisk("10001110011110000", 272);
+            Console.WriteLine("The answer to task 16 A is: " + task16AResult);
+            string task16BResult = task16.FillDisk("10001110011110000", 35651584);
+            Console.WriteLine("The answer to task 16 B is: " + task16BResult);
+            #endregion
+
+            #region task18
+            Task18 task18 = new Task18();
+            int task18AResult = task18.CountSafeTiles("^..^^.^^^..^^.^...^^^^^....^.^..^^^.^.^.^^...^.^.^.^.^^.....^.^^.^.^.^.^.^.^^..^^^^^...^.....^....^.", 40);
+            Console.WriteLine("The answer to task 18 A is: " + task18AResult);
+            int task18BResult = task18.CountSafeTiles("^..^^.^^^..^^.^...^^^^^....^.^..^^^.^.^.^^...^.^.^.^.^^.....^.^^.^.^.^.^.^.^^..^^^^^...^.....^....^.", 400000);
+            Console.WriteLine("The answer to task 18 B is: " + task18BResult);
+            #endregion
+
+
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
