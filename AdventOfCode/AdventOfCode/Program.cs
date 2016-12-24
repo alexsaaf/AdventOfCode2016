@@ -256,6 +256,13 @@ namespace AdventOfCode {
             Console.WriteLine("The answer to task 18 B is: " + task18BResult);
             #endregion
 
+            #region task19
+            Task19 task19 = new Task19();
+            int task19AResult = task19.Winner(3018458);
+            Console.WriteLine(task19AResult);
+
+            #endregion
+
 
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
