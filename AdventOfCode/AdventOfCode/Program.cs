@@ -263,6 +263,14 @@ namespace AdventOfCode {
 
             #endregion
 
+            #region task20
+            Task20 task20 = new Task20();
+            long task20AResult = task20.FindLowestOkIP(ReadLinesFromFile("Task20Input.txt"));
+            Console.WriteLine("The answer to task 20 A is: " + task20AResult);
+            long task20BResult = task20.CountOpenIPs(ReadLinesFromFile("Task20Input.txt"));
+            Console.WriteLine("The answer to task 20 B is: " + task20BResult);
+
+            #endregion
 
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
