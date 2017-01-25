@@ -8,7 +8,7 @@ namespace AdventOfCode {
     class Task21 {
 
         public string ScramblePassword(string original, string[] operations) {
-            char[] password = original.ToArray();
+            string password = original;
             foreach (String operation in operations) {
                 string[] components = operation.Split(' ');
                 switch (components[0]) {
@@ -20,31 +20,97 @@ namespace AdventOfCode {
                         }
                         break;
                     case "rotate":
+                        if (components[1].Equals("based")) {
+                            //Do the more advanced rotation
+                            int rotateBy = password.IndexOf(components[6]);
+                            if(rotateBy > 3) {
+                                rotateBy++;
+                            }
+                            rotateBy++;
+                            Rotate(ref password, false, rotateBy);
+                        }else {
+                            //Perform a basic rotation
+                            Rotate(ref password, (components[1].Equals("left")), Int16.Parse(components[2]));
+                        }
                         break;
                     case "reverse":
+                        //Find the indexes to reverse between
+                        int firstIndex = Int16.Parse(components[2]);
+                        int secondIndex = Int16.Parse(components[4]);
+                        Reverse(ref password, firstIndex, secondIndex);
                         break;
                     case "move":
+                        int moveFrom = Int16.Parse(components[2]);
+                        int moveTo = Int16.Parse(components[5]);
+                        Move(ref password, moveFrom, moveTo);
                         break;
                 }
+                Console.WriteLine(password);
+                Console.ReadKey();
 
 
             }
-            return password.ToString();
+            return password;
         }
 
-        void SwapPositions(ref char[] password, int firstIndex, int secondIndex) {
+        void SwapPositions(ref string password, int firstIndex, int secondIndex) {
             //Get the characters
-            char firstCharacter = password[firstIndex];
-            char secondCharacter = password[secondIndex];
+            string firstCharacter = password[firstIndex].ToString();
+            string secondCharacter = password[secondIndex].ToString();
+
+            Console.WriteLine("Swapping " + firstCharacter + " and " + secondCharacter);
             //Put them back, but with swapped positions
-            password[firstIndex] = secondCharacter;
-            password[secondIndex] = firstCharacter;
+            password = password.Remove(firstIndex, 1);
+            password = password.Insert(firstIndex, secondCharacter);
+
+            password = password.Remove(secondIndex, 1);
+            password = password.Insert(secondIndex, firstCharacter);
         }
 
-        void SwapLetters(ref char[] password, char firstLetter, char secondLetter) {
+        void SwapLetters(ref string password, string firstLetter, string secondLetter) {
+            int indexOfFirst = password.IndexOf(firstLetter);
+            int indexOfSecond = password.IndexOf(secondLetter);
 
+            SwapPositions(ref password, indexOfFirst, indexOfSecond);
+        }
 
+        void Rotate(ref string password, bool rotateLeft, int steps) {
+            if (rotateLeft) {
+                //Save the letter that will end up at the end of the password
+                char tmp = password[0];
+                //Rotate the password
+                for (int i = 0 ; i < password.Count() - 1; i++) {
+                    string temp = password[i + 1].ToString();
+                    password = password.Remove(i);
+                    password = password.Insert(i, temp);
+                }
+                password = password.Insert(password.Count() - 1, tmp.ToString());
+            } else {
+                char tmp = password[password.Count() - 1];
+                for (int i = password.Count() - 1; i > 0; i--) {
+                    password = password.Remove(i);
+                    password = password.Insert(i, password[i - 1].ToString());
+                }
+                password = password.Insert(0, tmp.ToString());
+            }
+        }
 
+        void Reverse(ref string password, int startIndex, int endIndex) {
+            Console.WriteLine("Reversing " + startIndex + " to " + endIndex);
+            string start = password.Substring(0, startIndex);
+            string toReverse = password.Substring(startIndex, endIndex - startIndex + 1);
+            string end = password.Substring(endIndex + 1, password.Length - endIndex - 1);
+
+            char[] charArray = toReverse.ToCharArray();
+            Array.Reverse(charArray);
+            password = start + new string(charArray) + end;
+        }
+
+        void Move(ref string password, int moveFrom, int moveTo) {
+            char character = password.ElementAt(moveFrom);
+            
+            password = password.Insert(moveTo, character.ToString());
+            password = password.Remove(moveFrom);
         }
     }
 }

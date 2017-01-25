@@ -82,6 +82,9 @@
     <Content Include="Task20Input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Task21Input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Task2Input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
