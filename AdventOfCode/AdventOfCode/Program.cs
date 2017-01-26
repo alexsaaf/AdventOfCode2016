@@ -274,7 +274,7 @@ namespace AdventOfCode {
 
             #region task21
             Task21 task21 = new Task21();
-            string task21AResult = task21.ScramblePassword("abcde", ReadLinesFromFile("Task21Input.txt"));
+            string task21AResult = task21.ScramblePassword("abcdefgh", ReadLinesFromFile("Task21Input.txt"));
             Console.WriteLine("The answer to task 21 A is: " + task21AResult);
             #endregion
 

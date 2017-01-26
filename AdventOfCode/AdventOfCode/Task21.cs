@@ -45,8 +45,8 @@ namespace AdventOfCode {
                         Move(ref password, moveFrom, moveTo);
                         break;
                 }
-                Console.WriteLine(password);
-                Console.ReadKey();
+                //Console.WriteLine(password);
+                //Console.ReadKey();
 
 
             }
@@ -75,23 +75,29 @@ namespace AdventOfCode {
         }
 
         void Rotate(ref string password, bool rotateLeft, int steps) {
-            if (rotateLeft) {
-                //Save the letter that will end up at the end of the password
-                char tmp = password[0];
-                //Rotate the password
-                for (int i = 0 ; i < password.Count() - 1; i++) {
-                    string temp = password[i + 1].ToString();
-                    password = password.Remove(i);
-                    password = password.Insert(i, temp);
+            for (int stepsTaken = 0; stepsTaken < steps; stepsTaken++) {
+
+                if (rotateLeft) {
+                    //Save the letter that will end up at the end of the password
+                    char tmp = password[0];
+                    Console.WriteLine("TMP is: " + tmp);
+                    //Rotate the password
+                    for (int i = 0; i < password.Count() - 1; i++) {
+                        string temp = password[i + 1].ToString();
+                        password = password.Remove(i, 1);
+                        password = password.Insert(i, temp);
+                    }
+                    password = password.Remove(password.Count() - 1, 1);
+                    password = password.Insert(password.Count(), tmp.ToString());
+                } else {
+                    char tmp = password[password.Count() - 1];
+                    for (int i = password.Count() - 1; i > 0; i--) {
+                        password = password.Remove(i, 1);
+                        password = password.Insert(i, password[i - 1].ToString());
+                    }
+                    password = password.Remove(0, 1);
+                    password = password.Insert(0, tmp.ToString());
                 }
-                password = password.Insert(password.Count() - 1, tmp.ToString());
-            } else {
-                char tmp = password[password.Count() - 1];
-                for (int i = password.Count() - 1; i > 0; i--) {
-                    password = password.Remove(i);
-                    password = password.Insert(i, password[i - 1].ToString());
-                }
-                password = password.Insert(0, tmp.ToString());
             }
         }
 
@@ -109,8 +115,8 @@ namespace AdventOfCode {
         void Move(ref string password, int moveFrom, int moveTo) {
             char character = password.ElementAt(moveFrom);
             
+            password = password.Remove(moveFrom,1);
             password = password.Insert(moveTo, character.ToString());
-            password = password.Remove(moveFrom);
         }
     }
 }
