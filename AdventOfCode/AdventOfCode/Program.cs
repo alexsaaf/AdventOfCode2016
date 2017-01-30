@@ -276,6 +276,8 @@ namespace AdventOfCode {
             Task21 task21 = new Task21();
             string task21AResult = task21.ScramblePassword("abcdefgh", ReadLinesFromFile("Task21Input.txt"));
             Console.WriteLine("The answer to task 21 A is: " + task21AResult);
+            string task21BResult = task21.UnscramblePassword("fbgdceah", ReadLinesFromFile("Task21Input.txt"));
+            Console.WriteLine("The answer to task 21 B is: " + task21BResult);
             #endregion
 
             // Keep the console window open

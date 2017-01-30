@@ -53,6 +53,58 @@ namespace AdventOfCode {
             return password;
         }
 
+        /// <summary>
+        /// Unscrambles the password by performing all actions in reverse.
+        /// ALt: Since 8! is not that large, we could simply bruteforce instead, 
+        /// by running all permutations of the letters through the scramblepassword
+        /// and compare the result to our given scrambled password untill we find a
+        /// match.
+        /// </summary>
+        /// <param name="scrambled"></param>
+        /// <param name="operations"></param>
+        /// <returns></returns>
+        public string UnscramblePassword(string scrambled, string[] operations) {
+            string password = scrambled;
+            //We need to perform all the operations backwards
+            for (int i = operations.Count() - 1; i >= 0; i--) {
+                string operation = operations[i];
+                string[] components = operation.Split(' ');
+                switch (components[0]) {
+                    case "swap":
+                        if (components[1].Equals("position")) {
+                            SwapPositions(ref password, Int16.Parse(components[5]), Int16.Parse(components[2]));
+                        } else {
+                            SwapLetters(ref password, components[5], components[2]);
+                        }
+                        break;
+                    case "rotate":
+                        if (components[1].Equals("based")) {
+                            //Do the more advanced rotation
+                            int characterIndex = password.IndexOf(components[6]);
+                            int rotateBy = characterIndex / 2 + ((characterIndex % 2 == 1 || characterIndex == 0) ? 1 : 5);
+                            Rotate(ref password, true, rotateBy);
+                        } else {
+                            //Perform a basic rotation
+                            Rotate(ref password, (!components[1].Equals("left")), Int16.Parse(components[2]));
+                        }
+                        break;
+                    case "reverse":
+                        //Find the indexes to reverse between
+                        int firstIndex = Int16.Parse(components[2]);
+                        int secondIndex = Int16.Parse(components[4]);
+                        Reverse(ref password, firstIndex, secondIndex);
+                        break;
+                    case "move":
+                        int moveFrom = Int16.Parse(components[2]);
+                        int moveTo = Int16.Parse(components[5]);
+                        Move(ref password, moveTo, moveFrom);
+                        break;
+                }
+            }
+
+            return password;
+        }
+
         void SwapPositions(ref string password, int firstIndex, int secondIndex) {
             //Get the characters
             string firstCharacter = password[firstIndex].ToString();
