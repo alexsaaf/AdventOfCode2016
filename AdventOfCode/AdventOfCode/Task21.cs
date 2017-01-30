@@ -81,6 +81,16 @@ namespace AdventOfCode {
                         if (components[1].Equals("based")) {
                             //Do the more advanced rotation
                             int characterIndex = password.IndexOf(components[6]);
+                            //  pos     shift       newpos
+                            //  0       1           1
+                            //  1       2           3
+                            //  2       3           5
+                            //  3       4           7
+                            //  4       6           2
+                            //  5       7           4
+                            //  6       8           6
+                            //  7       9           0
+                            // All odds follow one pattern and all even follow one pattern. 0 behaves like an odd index.
                             int rotateBy = characterIndex / 2 + ((characterIndex % 2 == 1 || characterIndex == 0) ? 1 : 5);
                             Rotate(ref password, true, rotateBy);
                         } else {
