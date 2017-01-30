@@ -58,6 +58,7 @@
     <Compile Include="Task2.cs" />
     <Compile Include="Task20.cs" />
     <Compile Include="Task21.cs" />
+    <Compile Include="Task22.cs" />
     <Compile Include="Task3.cs" />
     <Compile Include="Task4.cs" />
     <Compile Include="Task5.cs" />
@@ -83,6 +84,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Task21Input.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Task22Input.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Task2Input.txt">

@@ -280,6 +280,13 @@ namespace AdventOfCode {
             Console.WriteLine("The answer to task 21 B is: " + task21BResult);
             #endregion
 
+            #region task22
+            Task22 task22 = new Task22();
+            int task22AResult = task22.CalculateViablePairs(ReadLinesFromFile("Task22Input.txt"));
+            Console.WriteLine("The answer to task 22 A is: " + task22AResult);
+
+            #endregion
+
             // Keep the console window open
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();
